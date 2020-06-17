@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* タブレット向けレイアウト */
 @media all and (max-width: 1000px) {
   .lesson {
@@ -53,60 +52,4 @@
   .top-wrapper p {
     font-size: 14px;
   }
-=======
-/* タブレット向けレイアウト */
-@media all and (max-width: 1000px) {
-  .lesson {
-    width: 50%;
-    margin-bottom: 50px;
-  }
-
-  footer {
-    text-align: center;
-  }
-
-  .top-wrapper h1 {
-    font-size: 32px;
-  }
-
-  .heading h2 {
-    font-size: 20px;
-  }
-
-
-  /* header-rightクラスのdisplayをnoneに指定してください */
-  .header-right a{
-    width: 100%;
-    display: none;
-  }
-
-  #nav-drawer{
-    display:block;
-  }
-
-}
-
-/* スマホ向けレイアウト */
-@media all and (max-width: 670px) {
-  .lesson {
-    width: 100%;
-  }
-
-  .btn {
-    width: 100%;
-  }
-  
-  .top-wrapper {
-    text-align: left;
-  }
-
-  
-  .top-wrapper h1 {
-    font-size: 24px;
-  }
-
-  .top-wrapper p {
-    font-size: 14px;
-  }
->>>>>>> 6e9b1081f50432738fedfee39fcdb0908fc47cc1
 }
