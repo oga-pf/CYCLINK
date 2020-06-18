@@ -2,10 +2,8 @@
 // セッション開始
 session_start();
 
-$db['host'] = "localhost";  // DBサーバのURL
-$db['user'] = "root";  // ユーザー名
-$db['pass'] = "root";  // ユーザー名のパスワード
-$db['dbname'] = "db1";  // データベース名
+// データベース設定の読み込み
+require_once('param.php');
 
 // エラーメッセージの初期化
 $errorMessage = "";
@@ -52,9 +50,6 @@ if (isset($_POST["login"])) {
             }
         } catch (PDOException $e) {
             $errorMessage = 'データベースエラー';
-            //$errorMessage = $sql;
-            // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
-            // echo $e->getMessage();
         }
     }
 }
@@ -94,80 +89,68 @@ if (isset($_POST["test"])) {
         }
     } catch (PDOException $e) {
         $errorMessage = 'データベースエラー';
-        //$errorMessage = $sql;
-        // $e->getMessage() でエラー内容を参照可能（デバッグ時のみ表示）
-        // echo $e->getMessage();
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CYCLINK</title>
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="responsive.css">
-    <!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-  </head>
-  <body>
-    <header>
-      <div class="container">
+</head>
+<body>
+<header>
+    <div class="container">
         <div class="header-left">
             <a href="index.php"><img src="cyclink-logo.png"></a>
         </div>
-<!--        <span class="fa fa-bars menu-icon">
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-        </span>-->
         <div class="header-right">
-          <a href="registration.php">新規登録</a>
-          <a href="login.php" class="login">ログイン</a>
+            <a href="registration.php">新規登録</a>
+            <a href="login.php" class="login">ログイン</a>
         </div>
         <div id="nav-drawer">
-          <input id="nav-input" type="checkbox" class="nav-unshown">
-          <label id="nav-open" for="nav-input"><span></span></label>
-          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-          <div id="nav-content">
-              <p><a href="registration.php">新規登録</a></p>
-              <p><a href="login.php">ログイン</a></p>
-          </div>
+            <input id="nav-input" type="checkbox" class="nav-unshown">
+            <label id="nav-open" for="nav-input"><span></span></label>
+            <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+            <div id="nav-content">
+                <p><a href="registration.php">新規登録</a></p>
+                <p><a href="login.php">ログイン</a></p>
+            </div>
         </div>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <div class="top-wrapper2">
-        <div class="container2">
+<div class="top-wrapper2">
+    <div class="container2">
 
-            <form id="testForm" name="testForm" action="" method="POST">
-                <input type="submit" id="test" name="test" value="テストユーザーでログインする" class="btn btn-wrapper test">
-            </form>
+        <form id="testForm" name="testForm" action="" method="POST">
+            <input type="submit" id="test" name="test" value="テストユーザーでログインする" class="btn btn-wrapper test">
+        </form>
 
         <h2>ログイン</h2>
 
         <form id="loginForm" name="loginForm" action="" method="POST">
-<!--            <fieldset>-->
-<!--                <legend>ログインフォーム</legend>-->
-                <div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
+            <div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
             <p><label for="name">ニックネーム</label><br>
                 <input type="text" id="name" name="name" placeholder="ニックネームを入力" value="<?php if (!empty($_POST["name"])) {echo htmlspecialchars($_POST["name"], ENT_QUOTES);} ?>"></p>
 
             <p><label for="password">パスワード</label><br>
                 <input type="password" id="password" name="password" value="" placeholder="パスワードを入力"></p>
-                <input type="submit" id="login" name="login" value="ログイン" class="btn signup btn-wrapper">
+            <input type="submit" id="login" name="login" value="ログイン" class="btn signup btn-wrapper">
             </fieldset>
-<!--        </form>-->
             <p><a href="index.php" class="btn signup">戻る</a></p>
-        </div>
     </div>
+</div>
 
-    <footer>
-      <div class="container">
+<footer>
+    <div class="container">
         <a href="index.php"><img src="cyclink-logo.png"></a>
         <p>Copyright ©2020 CYCLINK Inc. All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
+    </div>
+</footer>
+</body>
 </html>

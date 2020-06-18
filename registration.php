@@ -2,10 +2,8 @@
 // セッション開始
 session_start();
 
-$db['host'] = "localhost";  // DBサーバのURL
-$db['user'] = "root";  // ユーザー名
-$db['pass'] = "root";  // ユーザー名のパスワード
-$db['dbname'] = "db1";  // データベース名
+// データベース設定の読み込み
+require_once('param.php');
 
 // エラーメッセージ、登録完了メッセージの初期化
 $errorMessage = "";
@@ -129,11 +127,6 @@ if (isset($_POST["test"])) {
         <div class="header-left">
             <a href="index.php"><img src="cyclink-logo.png"></a>
         </div>
-        <!--        <span class="fa fa-bars menu-icon">
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
-                </span>-->
         <div class="header-right">
             <a href="registration.php">新規登録</a>
             <a href="login.php" class="login">ログイン</a>

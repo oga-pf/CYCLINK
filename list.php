@@ -49,13 +49,17 @@ if (empty($_SESSION ['NAME'])) {
         </div>
         <div class="lessons">
             <?php
+            // データベース設定の読み込み
+            require_once('param.php');
+
             //画像を一覧表示する為にデータベースの情報を取得_START
+            $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
+
             try{
-                $pdo = new PDO(
-                    'mysql:host=localhost;dbname=db1;charset=utf8',
-                    'root',
-                    'root'
-                );
+
+                // データベース設定の読み込み
+                require_once('param.php');
+                $pdo = new PDO($dsn, $db['user'], $db['pass']);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             }catch(PDOException $Exception){

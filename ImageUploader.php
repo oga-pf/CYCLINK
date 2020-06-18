@@ -104,7 +104,6 @@ class ImageUploader {
                 imagepng($thumbImage, THUMBNAIL_DIR . '/' . $this->_imageFileName);
                 break;
         }
-
     }
 
     private function _validateImageType() {
@@ -122,8 +121,6 @@ class ImageUploader {
     }
 
     private function _validateUpload() {
-        // var_dump($_FILES);
-        // exit;
 
         if (!isset($_FILES['image']) || !isset($_FILES['image']['error'])) {
             throw new \Exception('Upload Error!');
@@ -138,7 +135,6 @@ class ImageUploader {
             default:
                 throw new \Exception('Err: ' . $_FILES['image']['error']);
         }
-
     }
 
     private function _save($ext) {
@@ -154,13 +150,11 @@ class ImageUploader {
             throw new \Exception('Could not upload!');
         }
 
+        // データベース設定の読み込み
+        require_once('param.php');
+
         //データベースへの画像データの登録処理_START
         try {
-            //DB名、ユーザー名、パスワード
-            $db['host'] = "localhost";  // DBサーバのURL
-            $db['user'] = "root";  // ユーザー名
-            $db['pass'] = "root";  // ユーザー名のパスワード
-            $db['dbname'] = "db1";  // データベース名
             $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
             $pdo = new PDO($dsn,  $db['user'], $db['pass'], array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION)); //MySQLのデータベースに接続
 
@@ -168,9 +162,6 @@ class ImageUploader {
             $stmt = $pdo->prepare($sql); //挿入する値は空のまま、SQL実行の準備をする
             $params = array(':userno' => $_SESSION["USERNO"], ':path' => $this->_imageFileName, ':description' => $_POST["description"], ':createdate' => date ("Y-m-d H:i:s")); // 挿入する値を配列に格納する
             $stmt->execute($params); //挿入する値が入った変数をexecuteにセットしてSQLを実行
-
-
-
         } catch (PDOException $e) {
             exit('データベースに接続できませんでした。' . $e->getMessage());
         }
@@ -178,6 +169,4 @@ class ImageUploader {
 
         return $savePath;
     }
-
-
 }
