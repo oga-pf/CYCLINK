@@ -79,8 +79,8 @@ if (empty($_SESSION ['NAME'])) {
                 <div class="lesson">
                     <div class="lesson-icon">
                         <dt>
-                            <a href="<?php echo '/cyclink/images/' . htmlspecialchars($row['PATH']); ?>">
-                                <img src="<?php echo '/cyclink/thumbs/' . htmlspecialchars($row['PATH']); ?>" alt="" width="150" height="120"></a>
+                            <a href="<?php echo './images/' . htmlspecialchars($row['PATH']); ?>">
+                                <img src="<?php echo './thumbs/' . htmlspecialchars($row['PATH']); ?>" alt="" width="150" height="120"></a>
                         </dt>
                     </div>
                     <p>投稿者：<th><?=htmlspecialchars($row['NAME'])?></th><br>日付：<?=substr(htmlspecialchars($row['CREATETIME']),0,10)?></p>
