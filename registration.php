@@ -1,9 +1,11 @@
 <?php
-// セッション開始
-session_start();
-
 // データベース設定の読み込み
 require_once('param.php');
+// 文字列のエスケープ処理
+require_once('escape.php');
+
+// セッション開始
+session_start();
 
 // エラーメッセージ、登録完了メッセージの初期化
 $errorMessage = "";
@@ -148,12 +150,12 @@ if (isset($_POST["test"])) {
             <input type="submit" id="test" name="test" value="テストユーザーでログインする" class="btn btn-wrapper test">
         </form>
         <h2>新規登録</h2>
-        <div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
-        <div><font color="#0000ff"><?php echo htmlspecialchars($signUpMessage, ENT_QUOTES); ?></font></div>
+        <div><font color="#ff0000"><?php echo es($errorMessage); ?></font></div>
+        <div><font color="#0000ff"><?php echo es($signUpMessage); ?></font></div>
 
         <form id="loginForm" name="loginForm" action="" method="POST">
             <p><label for="username">ニックネーム</label><br>
-                <input type="text" id="username" name="username" placeholder="ニックネームを入力" value="<?php if (!empty($_POST["username"])) {echo htmlspecialchars($_POST["username"], ENT_QUOTES);} ?>"></p>
+                <input type="text" id="username" name="username" placeholder="ニックネームを入力" value="<?php if (!empty($_POST["username"])) {echo es($_POST["username"]);} ?>"></p>
             <p><label for="password">パスワード</label><br>
                 <input type="password" id="password" name="password" value="" placeholder="パスワードを入力"></p>
             <p><label for="password2">パスワード（確認用）</label><br>

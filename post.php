@@ -1,4 +1,9 @@
 <?php
+
+require 'ImageUploader.php';
+// 文字列のエスケープ処理
+require_once('escape.php');
+
 session_start();
 if (empty($_SESSION ['NAME'])) {
     header("Location:index.php");
@@ -17,10 +22,8 @@ if (!function_exists('imagecreatetruecolor')) {
 }
 
 function h($s) {
-    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+    return es($s);
 }
-
-require 'ImageUploader.php';
 
 $uploader = new \MyApp\ImageUploader();
 

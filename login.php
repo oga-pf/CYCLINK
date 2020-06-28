@@ -1,9 +1,12 @@
 <?php
-// セッション開始
-session_start();
 
 // データベース設定の読み込み
 require_once('param.php');
+// 文字列のエスケープ処理
+require_once('escape.php');
+
+// セッション開始
+session_start();
 
 // エラーメッセージの初期化
 $errorMessage = "";
@@ -134,9 +137,9 @@ if (isset($_POST["test"])) {
         <h2>ログイン</h2>
 
         <form id="loginForm" name="loginForm" action="" method="POST">
-            <div><font color="#ff0000"><?php echo htmlspecialchars($errorMessage, ENT_QUOTES); ?></font></div>
+            <div><font color="#ff0000"><?php echo es($errorMessage); ?></font></div>
             <p><label for="name">ニックネーム</label><br>
-                <input type="text" id="name" name="name" placeholder="ニックネームを入力" value="<?php if (!empty($_POST["name"])) {echo htmlspecialchars($_POST["name"], ENT_QUOTES);} ?>"></p>
+                <input type="text" id="name" name="name" placeholder="ニックネームを入力" value="<?php if (!empty($_POST["name"])) {echo es($_POST["name"]);} ?>"></p>
 
             <p><label for="password">パスワード</label><br>
                 <input type="password" id="password" name="password" value="" placeholder="パスワードを入力"></p>

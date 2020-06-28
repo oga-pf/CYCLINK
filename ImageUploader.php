@@ -150,11 +150,11 @@ class ImageUploader {
             throw new \Exception('Could not upload!');
         }
 
-        // データベース設定の読み込み
-        require_once('param.php');
-
         //データベースへの画像データの登録処理_START
         try {
+            // データベース設定の読み込み
+            require_once('param.php');
+
             $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
             $pdo = new PDO($dsn,  $db['user'], $db['pass'], array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION)); //MySQLのデータベースに接続
 

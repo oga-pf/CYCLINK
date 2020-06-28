@@ -1,4 +1,10 @@
 <?php
+
+// データベース設定の読み込み
+require_once('param.php');
+// 文字列のエスケープ処理
+require_once('escape.php');
+
 session_start();
 if (empty($_SESSION ['NAME'])) {
     header("Location:index.php");
@@ -49,8 +55,6 @@ if (empty($_SESSION ['NAME'])) {
         </div>
         <div class="lessons">
             <?php
-            // データベース設定の読み込み
-            require_once('param.php');
 
             //画像を一覧表示する為にデータベースの情報を取得_START
             $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
@@ -58,7 +62,6 @@ if (empty($_SESSION ['NAME'])) {
             try{
 
                 // データベース設定の読み込み
-                require_once('param.php');
                 $pdo = new PDO($dsn, $db['user'], $db['pass']);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -79,12 +82,12 @@ if (empty($_SESSION ['NAME'])) {
                 <div class="lesson">
                     <div class="lesson-icon">
                         <dt>
-                            <a href="<?php echo './images/' . htmlspecialchars($row['PATH']); ?>">
-                                <img src="<?php echo './thumbs/' . htmlspecialchars($row['PATH']); ?>" alt="" width="150" height="120"></a>
+                            <a href="<?php echo './images/'?><?= es($row['PATH']); ?>">
+                                <img src="<?php echo './thumbs/'?><?= es($row['PATH']); ?>" alt="" width="150" height="120"></a>
                         </dt>
                     </div>
-                    <p>投稿者：<th><?=htmlspecialchars($row['NAME'])?></th><br>日付：<?=substr(htmlspecialchars($row['CREATETIME']),0,10)?></p>
-                    <p class="text-contents2"><?=htmlspecialchars($row['CAPTION'])?></p>
+                    <p>投稿者：<th><?=es($row['NAME'])?></th><br>日付：<?=substr(es($row['CREATETIME']),0,10)?></p>
+                    <p class="text-contents2"><?=es($row['CAPTION'])?></p>
                 </div>
                 <?php
             }
